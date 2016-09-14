@@ -34,10 +34,11 @@ auth(Socket, Login, Password, Database, NetModule) ->
 %% @private
 %% Get server version. This is need to choose default authentication method.
 -spec get_version(port(), binary(), module()) -> float().
-get_version(Socket, Database, SetOpts) ->
-  {true, #{<<"version">> := Version}} = mc_worker_api:sync_command(Socket, Database, {<<"buildinfo">>, 1}, SetOpts),
-  {VFloat, _} = string:to_float(binary_to_list(Version)),
-  VFloat.
+get_version(_Socket, _Database, _SetOpts) ->
+    3.2.
+  %% {true, #{<<"version">> := Version}} = mc_worker_api:sync_command(Socket, Database, {<<"buildinfo">>, 1}, SetOpts),
+  %% {VFloat, _} = string:to_float(binary_to_list(Version)),
+  %% VFloat.
 
 %% @private
 -spec do_auth(float(), port(), binary(), binary() | undefined, binary() | undefined, module()) -> boolean().
